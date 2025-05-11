@@ -11,27 +11,15 @@ class HomeHighScore extends StatelessWidget{
           child: Text('평점 높은순')),
         Container(
             height: 180,
-            child: ListView(
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  width: 150,
-                  color: Colors.red,
-                  child: Text('1'),
-                ),
-                Container(
-                  width: 150,
-                  color: Colors.amber,
-                  child: Text('2')),
-                Container(
-                  width: 150,
-                  color: Colors.green,
-                  child: Text('3')),
-                Container(
-                  width: 150,
-                  color: Colors.blue,
-                  child: Text('4'))
-              ],
+              itemBuilder:(context, index) {
+                return Text('data');
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(width: 10);
+              },
+              itemCount: 5,
             ),
           ),
       ],
