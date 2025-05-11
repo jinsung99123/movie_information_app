@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movie_information_app/UI/home/widgets/home_high_score.dart';
+import 'package:movie_information_app/UI/home/widgets/home_ing.dart';
+import 'package:movie_information_app/UI/home/widgets/home_most_popular.dart';
+import 'package:movie_information_app/UI/home/widgets/home_popular.dart';
+import 'package:movie_information_app/UI/home/widgets/home_scheduled.dart';
 
 class HomePage extends StatelessWidget{
   @override
@@ -6,12 +11,11 @@ class HomePage extends StatelessWidget{
     return Scaffold(
       body: ListView(
         children: [
-          Text('가장 인기 있는'),
-          Text('현재 상영중'),
-          Text('인기순'),
-          Text('평점 높은순'),
-          Text('개봉예정정')
-
+          HomeMostPopular(),
+          HomeIng(),
+          HomePopular(),
+          HomeHighScore(),
+          HomeScheduled()
         ],
       ),
     );
