@@ -10,7 +10,7 @@ class HomePopular extends StatelessWidget{
           height: 50,
           child: Text('인기순')),
         Container(
-            height: 200,
+            height: 180,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [

@@ -10,7 +10,7 @@ class HomeScheduled extends StatelessWidget{
           height: 50,
           child: Text('개봉예정')),
         Container(
-            height: 200,
+            height: 180,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [

@@ -10,7 +10,7 @@ class HomeMostPopular extends StatelessWidget{
           height: 50,
           child: Text('가장 인기있는')),
         Container(
-            height: 200,
+            height: 180,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [

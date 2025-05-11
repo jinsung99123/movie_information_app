@@ -10,7 +10,7 @@ class HomeIng extends StatelessWidget{
           height: 50,
           child: Text('현재 상영중')),
         Container(
-            height: 200,
+            height: 180,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [

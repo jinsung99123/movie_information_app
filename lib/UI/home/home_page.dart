@@ -9,14 +9,17 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          HomeMostPopular(),
-          HomeIng(),
-          HomePopular(),
-          HomeHighScore(),
-          HomeScheduled()
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ListView(
+          children: [
+            HomeMostPopular(),
+            HomeIng(),
+            HomePopular(),
+            HomeHighScore(),
+            HomeScheduled()
+          ],
+        ),
       ),
     );
   }
