@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 class MovieApi {
   final String apiKey = 'f8f541812e1aae2feeaab5cae1eb9c93';
   final String baseUrl = 'https://api.themoviedb.org/3';
-     static const String readAccessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGY1NDE4MTJlMWFhZTJmZWVhYWI1Y2FlMWViOWM5MyIsIm5iZiI6MTc0Njk2NTQwMC44NTYsInN1YiI6IjY4MjA5Mzk4OTE5ZDkzYWZlNjg2M2NmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EJgBJYNAY_LPiNMw58_rjpDgJ1EvOJeQD39fb6bIoIk';
 
   Future<List<dynamic>> fetchPopularMovies() async {
     final response = await http.get(

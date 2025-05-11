@@ -8,7 +8,7 @@ class Movie {
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
     title: json['title'] ?? '제목없음', 
-    posterPath: json['poster'] ?? '',
+    posterPath: json['posterPath'] ?? '',
     rating: json['vote_average']?.toDouble()?? 0.0);
   }
 }
