@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/UI/detail/detail_page.dart';
-import 'package:movie_information_app/data/provider/movie_provider.dart';
+import 'package:movie_information_app/data/provider/home_provider.dart';
 
 class HomeHighScore extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieState = ref.watch(movieViewModelProvider);
+    final movieState = ref.watch(homeViewModelProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

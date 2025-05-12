@@ -2,10 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/data/api/api_service.dart';
 import 'package:movie_information_app/data/model/home.dart';
 
-class MovieViewModel extends StateNotifier<AsyncValue<Map<String, List<Movie>>>> {
+class HomeViewModel
+    extends StateNotifier<AsyncValue<Map<String, List<Movie>>>> {
   final MovieApi movieApi;
 
-  MovieViewModel(this.movieApi) : super(const AsyncValue.loading()) {
+  HomeViewModel(this.movieApi) : super(const AsyncValue.loading()) {
     fetchAllCategories();
   }
 

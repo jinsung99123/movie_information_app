@@ -64,4 +64,16 @@ class MovieApi {
       throw Exception('영화 불러오기 실패');
     }
   }
+
+  Future<Map<String, dynamic>> fetchMovieDetail(int movieId) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/movie/$movieId?api_key=$apiKey&language=en-US'),
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('영화 상세정보보 불러오기 실패');
+    }
+  }
 }
