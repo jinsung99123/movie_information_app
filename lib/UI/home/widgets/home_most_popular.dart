@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_information_app/UI/detail/detail_page.dart';
 import 'package:movie_information_app/data/provider/movie_provider.dart';
 
 class HomeMostPopular extends ConsumerWidget {
@@ -21,9 +22,14 @@ class HomeMostPopular extends ConsumerWidget {
                   final posterPath = movie.posterPath;
                   final imageUrl = 'https://image.tmdb.org/t/p/w500$posterPath';
                 
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Image.network(imageUrl),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage(movie: movie)));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Image.network(imageUrl),
+                    ),
                   );              
             },
             loading: () => Center(child: CircularProgressIndicator()),
