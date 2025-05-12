@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie_information_app/data/model/movie.dart';
 
 class DetailPage extends StatelessWidget{
+  final Movie movie;
+  const DetailPage({required this.movie});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

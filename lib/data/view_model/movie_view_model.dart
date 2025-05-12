@@ -27,4 +27,3 @@ class MovieViewModel extends StateNotifier<AsyncValue<Map<String, List<Movie>>>>
     }
   }
 }
-
