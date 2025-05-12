@@ -1,14 +1,10 @@
 class Movie {
-  final String title;
+  final int id;
   final String posterPath;
-  final double rating;
 
-  Movie({required this.title, required this.posterPath, required this.rating});
+  Movie({required this.id, required this.posterPath});
 
   factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
-    title: json['title'] ?? '제목없음', 
-    posterPath: json['poster_path'] ?? '',
-    rating: json['vote_average']?.toDouble()?? 0.0);
+    return Movie(id: json['id'] ?? 0, posterPath: json['poster_path'] ?? '');
   }
 }

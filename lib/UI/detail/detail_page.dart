@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/data/model/home.dart';
+import 'package:movie_information_app/data/provider/detail_provider.dart';
+import 'package:movie_information_app/data/model/detail.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends ConsumerWidget {
   final Movie movie;
-  const DetailPage({required this.movie});
+  const DetailPage({super.key, required this.movie});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final detailState = ref.watch(detailViewModelProvider(movie.id));
+
     return Scaffold(
       appBar: AppBar(title: Text('상세 페이지')),
       body: ListView(
         children: [
-          Container(height: 500, color: Colors.blue),
+          Container(height: 500,
+          child: Image.network('http://tmdb.org/t/p/w500${movie.posterPath}'),),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -21,7 +27,7 @@ class DetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Moana2',
+                      'moana 2',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,

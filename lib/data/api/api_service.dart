@@ -73,7 +73,7 @@ class MovieApi {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('영화 상세정보보 불러오기 실패');
+      throw Exception('영화 상세정보 불러오기 실패');
     }
   }
 }
