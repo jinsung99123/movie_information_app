@@ -23,7 +23,7 @@ class MovieApi {
   Future<List<dynamic>> fetchTopRatedMovies() async {
     final response = await http.get(
       Uri.parse(
-        '$baseUrl/discover/movie?api_key=$apiKey&language=en-US&page=1&sort_by=vote_average.desc'
+        '$baseUrl/discover/movie?api_key=$apiKey&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=1000'
       ),
     );
 
