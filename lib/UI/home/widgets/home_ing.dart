@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_information_app/data/provider/movie_provider.dart';
 
-class HomeIng extends StatelessWidget{
+class HomeIng extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieState = ref.watch(movieViewModelProvider);
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          height: 50,
-          child: Text('현재 상영중')),
-        Container(
-            height: 180,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  width: 150,
-                  color: Colors.red,
-                  child: Text('1'),
-                ),
-                Container(
-                  width: 150,
-                  color: Colors.amber,
-                  child: Text('2')),
-                Container(
-                  width: 150,
-                  color: Colors.green,
-                  child: Text('3')),
-                Container(
-                  width: 150,
-                  color: Colors.blue,
-                  child: Text('4'))
-              ],
-            ),
+        Text('상영중', style: TextStyle(fontSize: 18)),
+        SizedBox(height: 10),
+        SizedBox(
+          height: 180,
+          child: movieState.when(
+            data: (movieMap) {
+              final nowPlaying = movieMap['nowPlaying'] ?? [];
+
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: nowPlaying.length,
+                itemBuilder: (context, index) {
+                  final movie = nowPlaying[index];
+                  final posterPath = movie.posterPath;
+                  final imageUrl = 'https://image.tmdb.org/t/p/w500$posterPath';
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Image.network(imageUrl, width: 120, height: 180, fit: BoxFit.cover),
+                  );
+                },
+              );
+            },
+            loading: () => Center(child: CircularProgressIndicator()),
+            error: (e, _) => Text('에러 발생'),
           ),
+        ),
       ],
     );
   }
