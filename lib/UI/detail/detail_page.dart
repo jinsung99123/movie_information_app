@@ -10,7 +10,7 @@ class DetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final detailState = ref.watch(detailViewModelProvider(movie.id)); // movie.id를 전달
+    final detailState = ref.watch(detailViewModelProvider(movie.id));
 
     return Scaffold(
       appBar: AppBar(title: Text('상세 페이지')),
@@ -42,7 +42,7 @@ class DetailPage extends ConsumerWidget {
                   ),
                   Text(movieDetail.tagline),
                   Text('${movieDetail.runtime}분'),
-                  Text(movieDetail.genres),
+                  Text(movieDetail.genres.join(', ')), 
                   Text(movieDetail.overview),
                   SizedBox(
                     height: 60,
@@ -72,7 +72,7 @@ class DetailPage extends ConsumerWidget {
           ],
         ),
         error: (error, stackTrace) => Center(
-          child: Text('영화 정보를 가져오는 데 실패했습니다.'),
+          child: Text('영화 정보 불러오기기 실패.'),
         ),
       ),
     );
