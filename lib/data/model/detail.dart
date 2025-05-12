@@ -5,11 +5,11 @@ class MovieDetail {
   final String runtime;
   final List<String> genres;
   final String overview;
-  final String voteAverage;
-  final String voteCount;
-  final String popularity;
-  final String budget;
-  final String revenue;
+  final double voteAverage;
+  final int voteCount;
+  final double popularity;
+  final int budget;
+  final int revenue;
   final List<String> productionCompanies;
 
   MovieDetail({
@@ -32,8 +32,8 @@ class MovieDetail {
       title: json['title'] ?? '제목없음',
       releaseDate: json['release_date'] ?? '',
       tagline: json['tagline'] ?? '',
-      runtime: json['runtime'] ?? 0,
-      genres: List<String>.from(json['genres'] ?? []),
+      runtime: json['runtime']?.toString() ?? '0', // 'runtime'은 숫자일 수 있어서 String으로 변환
+      genres: List<String>.from(json['genres']?.map((e) => e['name'] ?? '') ?? []),
       overview: json['overview'] ?? '',
       voteAverage: (json['vote_average'] ?? 0).toDouble(),
       voteCount: json['vote_count'] ?? 0,

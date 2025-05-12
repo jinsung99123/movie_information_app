@@ -6,7 +6,9 @@ class DetailViewModel extends StateNotifier<AsyncValue<MovieDetail>> {
   final MovieApi movieApi;
   final int movieId;
 
-  DetailViewModel(this.movieApi, this.movieId) : super(const AsyncValue.loading());
+  DetailViewModel(this.movieApi, this.movieId) : super(const AsyncValue.loading()) {
+    fetchAllDetails();
+  }
 
   Future<void> fetchAllDetails() async {
     try {
@@ -14,6 +16,7 @@ class DetailViewModel extends StateNotifier<AsyncValue<MovieDetail>> {
       final detail = MovieDetail.fromJson(json);
       state = AsyncValue.data(detail);
     } catch (e, st) {
+      print('Error fetching movie details: $e');
       state = AsyncValue.error(e, st);
     }
   }

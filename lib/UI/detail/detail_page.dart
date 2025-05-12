@@ -72,7 +72,7 @@ class DetailPage extends ConsumerWidget {
           ],
         ),
         error: (error, stackTrace) => Center(
-          child: Text('영화 정보 불러오기기 실패.'),
+          child: Text('영화 정보 불러오기 실패.'),
         ),
       ),
     );
