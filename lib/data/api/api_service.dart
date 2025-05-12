@@ -8,7 +8,7 @@ class MovieApi {
   Future<List<dynamic>> fetchPopularMovies() async {
     final response = await http.get(
       Uri.parse(
-        '$baseUrl/discover/movie?api_key=$apiKey&language=en-US&page=1&sort_by=popularity.desc'
+        '$baseUrl/discover/movie?api_key=$apiKey&language=en-US&page=1&sort_by=popularity.desc',
       ),
     );
 
@@ -23,7 +23,7 @@ class MovieApi {
   Future<List<dynamic>> fetchTopRatedMovies() async {
     final response = await http.get(
       Uri.parse(
-        '$baseUrl/discover/movie?api_key=$apiKey&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=1000'
+        '$baseUrl/movie/top_rated?api_key=$apiKey&language=en-US&page=1',
       ),
     );
 
@@ -38,7 +38,7 @@ class MovieApi {
   Future<List<dynamic>> fetchUpcomingMovies() async {
     final response = await http.get(
       Uri.parse(
-        '$baseUrl/movie/upcoming?api_key=$apiKey&language=en-US&page=1'
+        '$baseUrl/movie/upcoming?api_key=$apiKey&language=en-US&page=1',
       ),
     );
 
@@ -53,7 +53,7 @@ class MovieApi {
   Future<List<dynamic>> fetchNowPlayingMovies() async {
     final response = await http.get(
       Uri.parse(
-        '$baseUrl/movie/now_playing?api_key=$apiKey&language=en-US&page=1'
+        '$baseUrl/movie/now_playing?api_key=$apiKey&language=en-US&page=1',
       ),
     );
 
