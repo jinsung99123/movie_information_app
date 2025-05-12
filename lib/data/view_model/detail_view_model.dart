@@ -1,1 +1,20 @@
-class DetailViewModel {}
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_information_app/data/api/api_service.dart';
+import 'package:movie_information_app/data/model/detail.dart';
+
+class DetailViewModel
+    extends StateNotifier<AsyncValue<MovieDetail>> {
+  final MovieApi movieApi;
+
+  DetailViewModel(this.movieApi) : super(const AsyncValue.loading());
+  
+  Future<void> fetchAllDetails(int movieId) async {
+    try {
+      final json = await movieApi.fetchMovieDetail(movieId);
+      final detail = MovieDetail.fromJson(json);
+      state = AsyncValue.data(detail);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
+}
