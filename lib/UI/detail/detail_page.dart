@@ -14,66 +14,82 @@ class DetailPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text('상세 페이지')),
-      body: detailState.when(
-        loading: () => Center(child: CircularProgressIndicator()),
-        data: (movieDetail) => ListView(
-          children: [
-            Container(
-              height: 500,
-              child: Image.network('http://tmdb.org/t/p/w500${movie.posterPath}'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        movieDetail.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(movieDetail.releaseDate),
-                    ],
-                  ),
-                  Text(movieDetail.tagline),
-                  Text('${movieDetail.runtime}분'),
-                  Text(movieDetail.genres.join(', ')), 
-                  Text(movieDetail.overview),
-                  SizedBox(
-                    height: 60,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Text('평점: ${movieDetail.voteAverage}'),
-                        Text('평점 투표수: ${movieDetail.voteCount}'),
-                        Text('인기 점수: ${movieDetail.popularity}'),
-                        Text('예산: ${movieDetail.budget}'),
-                        Text('수익: ${movieDetail.revenue}'),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: movieDetail.productionCompanies
-                          .map((company) => Text(company))
-                          .toList(),
-                    ),
-                  ),
-                ],
+      body: ListView(
+        children: [
+          // ✅ Hero는 항상 먼저 존재하도록!
+          Container(
+            height: 500,
+            child: Hero(
+              tag: 'poster-image-${movie.id}',
+              child: Image.network(
+                'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                fit: BoxFit.cover,
               ),
             ),
-          ],
-        ),
-        error: (error, stackTrace) => Center(
-          child: Text('영화 정보 불러오기 실패.'),
-        ),
+          ),
+          // ✅ 아래부터는 상태에 따라 달라짐
+          detailState.when(
+            loading:
+                () => Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+            error:
+                (error, stackTrace) => Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Center(child: Text('영화 정보 불러오기 실패.')),
+                ),
+            data:
+                (movieDetail) => Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            movieDetail.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(movieDetail.releaseDate),
+                        ],
+                      ),
+                      Text(movieDetail.tagline),
+                      Text('${movieDetail.runtime}분'),
+                      Text(movieDetail.genres.join(', ')),
+                      Text(movieDetail.overview),
+                      SizedBox(
+                        height: 60,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Text('평점: ${movieDetail.voteAverage}'),
+                            Text('평점 투표수: ${movieDetail.voteCount}'),
+                            Text('인기 점수: ${movieDetail.popularity}'),
+                            Text('예산: ${movieDetail.budget}'),
+                            Text('수익: ${movieDetail.revenue}'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 60,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children:
+                              movieDetail.productionCompanies
+                                  .map((company) => Text(company))
+                                  .toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+          ),
+        ],
       ),
     );
   }
