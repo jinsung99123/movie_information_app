@@ -7,6 +7,7 @@ class HomeScheduled extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final movieState = ref.watch(homeViewModelProvider);
+    final String category = 'upcoming';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,12 +30,12 @@ class HomeScheduled extends ConsumerWidget {
 
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage(movie: movie)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage(movie: movie, category: category,)));
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Hero(
-                        tag: 'poster-image-${movie.id}',
+                        tag: 'poster-image-${movie.id}-$category',
                         child: Image.network(imageUrl, width: 120, height: 180, fit: BoxFit.cover)),
                     ),
                   );

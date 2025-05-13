@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/data/model/home.dart';
@@ -6,7 +7,8 @@ import 'package:movie_information_app/data/provider/detail_provider.dart';
 
 class DetailPage extends ConsumerWidget {
   final Movie movie;
-  const DetailPage({super.key, required this.movie});
+  final String category;
+  const DetailPage({super.key, required this.movie,required this.category});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +21,7 @@ class DetailPage extends ConsumerWidget {
           Container(
             height: 500,
             child: Hero(
-              tag: 'poster-image-${movie.id}',
+              tag: 'poster-image-${movie.id}-$category',
               child: Image.network(
                 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                 fit: BoxFit.cover,
