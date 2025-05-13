@@ -33,7 +33,9 @@ class HomePopular extends ConsumerWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Image.network(imageUrl, width: 120, height: 180, fit: BoxFit.cover),
+                      child: Hero(
+                        tag: 'poster-image-${movie.id}',
+                        child: Image.network(imageUrl, width: 120, height: 180, fit: BoxFit.cover)),
                     ),
                   );
                 },

@@ -28,7 +28,9 @@ class HomeMostPopular extends ConsumerWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Image.network(imageUrl),
+                      child: Hero(
+                        tag: 'poster-image-${movie.id}',
+                        child: Image.network(imageUrl)),
                     ),
                   );              
             },
