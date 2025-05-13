@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/data/model/home.dart';
 import 'package:movie_information_app/data/provider/detail_provider.dart';
-import 'package:movie_information_app/data/model/detail.dart';
+
 
 class DetailPage extends ConsumerWidget {
   final Movie movie;
@@ -16,7 +16,6 @@ class DetailPage extends ConsumerWidget {
       appBar: AppBar(title: Text('상세 페이지')),
       body: ListView(
         children: [
-          // ✅ Hero는 항상 먼저 존재하도록!
           Container(
             height: 500,
             child: Hero(
@@ -27,7 +26,6 @@ class DetailPage extends ConsumerWidget {
               ),
             ),
           ),
-          // ✅ 아래부터는 상태에 따라 달라짐
           detailState.when(
             loading:
                 () => Padding(
