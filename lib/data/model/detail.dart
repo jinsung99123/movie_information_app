@@ -10,7 +10,7 @@ class MovieDetail {
   final double popularity;
   final int budget;
   final int revenue;
-  final List<String> productionCompanies;
+  final List<Map<String, dynamic>> productionCompanies; 
 
   MovieDetail({
     required this.title,
@@ -24,7 +24,7 @@ class MovieDetail {
     required this.popularity,
     required this.budget,
     required this.revenue,
-    required this.productionCompanies,
+    required this.productionCompanies, 
   });
 
   factory MovieDetail.fromJson(Map<String, dynamic> json) {
@@ -32,7 +32,7 @@ class MovieDetail {
       title: json['title'] ?? '제목없음',
       releaseDate: json['release_date'] ?? '',
       tagline: json['tagline'] ?? '',
-      runtime: json['runtime']?.toString() ?? '0', // 'runtime'은 숫자일 수 있어서 String으로 변환
+      runtime: json['runtime']?.toString() ?? '0',
       genres: List<String>.from(json['genres']?.map((e) => e['name'] ?? '') ?? []),
       overview: json['overview'] ?? '',
       voteAverage: (json['vote_average'] ?? 0).toDouble(),
@@ -40,7 +40,9 @@ class MovieDetail {
       popularity: (json['popularity'] ?? 0).toDouble(),
       budget: json['budget'] ?? 0,
       revenue: json['revenue'] ?? 0,
-      productionCompanies: List<String>.from(json['production_companies']?.map((e) => e['name'] ?? '') ?? []),
+      productionCompanies: List<Map<String, dynamic>>.from(
+        json['production_companies']?.map((e) => e) ?? [],
+      ), 
     );
   }
 }

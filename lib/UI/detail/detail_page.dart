@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/UI/detail/widgets/tag_container.dart';
@@ -75,9 +74,7 @@ class DetailPage extends ConsumerWidget {
                                       vertical: 6,
                                     ),
                                     decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.white,
-                                      ),
+                                      border: Border.all(color: Colors.white),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
@@ -94,7 +91,7 @@ class DetailPage extends ConsumerWidget {
                         ],
                       ),
                       Text(movieDetail.overview),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 20),
                       SizedBox(
                         height: 60,
                         child: ListView(
@@ -109,15 +106,45 @@ class DetailPage extends ConsumerWidget {
                           ],
                         ),
                       ),
+                      SizedBox(height: 20),
 
                       SizedBox(
-                        height: 60,
-                        child: ListView(
+                        height: 80,
+                        child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          children:
-                              movieDetail.productionCompanies
-                                  .map((company) => Text(company))
-                                  .toList(),
+                          itemCount: movieDetail.productionCompanies.length,
+                          itemBuilder: (context, index) {
+                            var company =
+                                movieDetail.productionCompanies[index];
+                            var logoPath = company['logo_path'];
+
+                            if (logoPath != null) {
+                              var imageUrl =
+                                  'https://image.tmdb.org/t/p/w500$logoPath';
+
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(
+                                      0.9,
+                                    ), 
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Image.network(
+                                    imageUrl,
+                                    width: 100,
+                                    height: 50,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return SizedBox.shrink();
+                            }
+                          },
                         ),
                       ),
                     ],
