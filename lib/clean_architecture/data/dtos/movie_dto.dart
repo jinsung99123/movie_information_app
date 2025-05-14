@@ -1,8 +1,6 @@
 class MovieDto {
   final int id;
   final String posterPath;
-
-  // Detail info
   final String? title;
   final String? releaseDate;
   final String? tagline;
