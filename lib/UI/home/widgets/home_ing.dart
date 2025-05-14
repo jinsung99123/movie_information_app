@@ -1,52 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_information_app/UI/detail/detail_page.dart';
-import 'package:movie_information_app/data/provider/home_provider.dart';
+import 'package:movie_information_app/UI/home/widgets/home_category.dart';
 
-class HomeIng extends ConsumerWidget {
+
+class HomeIng extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final movieState = ref.watch(homeViewModelProvider);
-    final String category = 'ing';
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('상영중', style: TextStyle(fontSize: 18)),
-        SizedBox(height: 10),
-        SizedBox(
-          height: 180,
-          child: movieState.when(
-            data: (movieMap) {
-              final nowPlaying = movieMap['nowPlaying'] ?? [];
-
-              return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: nowPlaying.length,
-                itemBuilder: (context, index) {
-                  final movie = nowPlaying[index];
-                  final posterPath = movie.posterPath;
-                  final imageUrl = 'https://image.tmdb.org/t/p/w500$posterPath';
-
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage(movie: movie, category: category,)));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Hero(
-                        tag: 'poster-image-${movie.id}-$category',
-                        child: Image.network(imageUrl, width: 120, height: 180, fit: BoxFit.cover)),
-                    ),
-                  );
-                },
-              );
-            },
-            loading: () => Center(child: CircularProgressIndicator()),
-            error: (e, _) => Text('에러 발생'),
-          ),
-        ),
-      ],
+  Widget build(BuildContext context) {
+    return HomeCategory(
+      title: '상영중',
+      category: 'ing',
+      mapKey: 'nowPlaying',
     );
   }
 }

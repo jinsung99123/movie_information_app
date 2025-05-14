@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/UI/detail/detail_page.dart';
 import 'package:movie_information_app/data/provider/home_provider.dart';
 
-class HomeMovieListSection extends ConsumerWidget {
+class HomeCategory extends ConsumerWidget {
   final String title;
   final String category;
   final String mapKey;
 
-  const HomeMovieListSection({
+  const HomeCategory({
     Key? key,
     required this.title,
     required this.category,
