@@ -4,11 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_information_app/data/model/home.dart';
 import 'package:movie_information_app/data/provider/detail_provider.dart';
 
-
 class DetailPage extends ConsumerWidget {
   final Movie movie;
   final String category;
-  const DetailPage({super.key, required this.movie,required this.category});
+  const DetailPage({super.key, required this.movie, required this.category});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +18,7 @@ class DetailPage extends ConsumerWidget {
       body: ListView(
         children: [
           Container(
-            height: 500,
+            height: 600,
             child: Hero(
               tag: 'poster-image-${movie.id}-$category',
               child: Image.network(
@@ -60,7 +59,39 @@ class DetailPage extends ConsumerWidget {
                       ),
                       Text(movieDetail.tagline),
                       Text('${movieDetail.runtime}분'),
-                      Text(movieDetail.genres.join(', ')),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Divider(),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children:
+                                movieDetail.genres.map((genre) {
+                                  return Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ), // 파란 테두리
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Text(
+                                      genre,
+                                      style: TextStyle(
+                                        color: Colors.blue, // 파란 글씨
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                          ),
+                          Divider(),
+                        ],
+                      ),
                       Text(movieDetail.overview),
                       SizedBox(
                         height: 60,
