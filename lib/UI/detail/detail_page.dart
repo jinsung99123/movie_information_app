@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_information_app/UI/detail/widgets/tag_container.dart';
 import 'package:movie_information_app/data/model/home.dart';
 import 'package:movie_information_app/data/provider/detail_provider.dart';
 
@@ -76,13 +77,13 @@ class DetailPage extends ConsumerWidget {
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color: Colors.white,
-                                      ), // 파란 테두리
+                                      ),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
                                       genre,
                                       style: TextStyle(
-                                        color: Colors.blue, // 파란 글씨
+                                        color: Colors.blue,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -93,19 +94,22 @@ class DetailPage extends ConsumerWidget {
                         ],
                       ),
                       Text(movieDetail.overview),
+                      SizedBox(height: 20,),
                       SizedBox(
                         height: 60,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
+                          padding: EdgeInsets.symmetric(horizontal: 8),
                           children: [
-                            Text('평점: ${movieDetail.voteAverage}'),
-                            Text('평점 투표수: ${movieDetail.voteCount}'),
-                            Text('인기 점수: ${movieDetail.popularity}'),
-                            Text('예산: ${movieDetail.budget}'),
-                            Text('수익: ${movieDetail.revenue}'),
+                            TagContainer('평점: ${movieDetail.voteAverage}'),
+                            TagContainer('평점 투표수: ${movieDetail.voteCount}'),
+                            TagContainer('인기 점수: ${movieDetail.popularity}'),
+                            TagContainer('예산: ${movieDetail.budget}'),
+                            TagContainer('수익: ${movieDetail.revenue}'),
                           ],
                         ),
                       ),
+
                       SizedBox(
                         height: 60,
                         child: ListView(
