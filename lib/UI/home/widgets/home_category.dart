@@ -22,7 +22,10 @@ class HomeCategory extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(fontSize: 18)),
+        Text(
+          title,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         SizedBox(height: 10),
         SizedBox(
           height: 180,
@@ -49,14 +52,38 @@ class HomeCategory extends ConsumerWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Hero(
-                        tag: 'poster-image-${movie.id}-$category',
-                        child: Image.network(
-                          imageUrl,
-                          width: 120,
-                          height: 180,
-                          fit: BoxFit.cover,
-                        ),
+                      child: Stack(
+                        children: [
+                          Hero(
+                            tag: 'poster-image-${movie.id}-$category',
+                            child: Image.network(
+                              imageUrl,
+                              width: 120,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          if (mapKey == 'popular')
+                            Positioned(
+                              bottom: 4,
+                              left: 4,
+                              child: Text(
+                                '${index + 1}',
+                                style: TextStyle(
+                                  fontSize: 70,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(2, 2),
+                                      blurRadius: 4,
+                                      color: Colors.black.withOpacity(0.8),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                   );
@@ -64,7 +91,7 @@ class HomeCategory extends ConsumerWidget {
               );
             },
             loading: () => Center(child: CircularProgressIndicator()),
-            error: (e, _) => Text('에러 발생'),
+            error: (e, _) => Text('에러 발생: $e'),
           ),
         ),
       ],
