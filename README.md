@@ -32,3 +32,5 @@
 - Repository 에서 API (Model) 호출
 - API가 TMDB 서버에서 응답 받아옴
 - 응답을 Repository -> ViewModel -> UI 전달
+
+- 클린 아키텍쳐 구조는 완성 후 README 수정 예정
